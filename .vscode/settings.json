@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/b9b5a249-6d86-4d0d-b9bc-319dbf5bf2a7/resourceGroups/BunnyBot/providers/Microsoft.Web/sites/bunnybots",
+    "appService.deploySubpath": "."
+}
