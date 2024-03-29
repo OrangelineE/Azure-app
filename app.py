@@ -21,13 +21,10 @@ def index():
 def convert_to_text_once():
     #process audio
     towav.process_audio()
-    subscription=credentials.subscription
-    region=credentials.region
-    speech_config = speechsdk.SpeechConfig(subscription=subscription, region=region)
+    speech_key, service_region = "328d4b7e54bb445bbff9218e43468a73", "eastus"
+    speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
     audio_config = speechsdk.AudioConfig(filename="temp.wav")
-
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
-
     result = speech_recognizer.recognize_once_async().get()
     return result.text
 
@@ -37,16 +34,11 @@ def convert_to_text_continuous():
     towav.process_audio()
     
     """performs continuous speech recognition with input from an audio file"""
-    subscription=credentials.subscription
-    region=credentials.region
-
-    speech_config = speechsdk.SpeechConfig(subscription=subscription, region=region)
+    speech_key, service_region = "328d4b7e54bb445bbff9218e43468a73", "eastus"
+    speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
     audio_config = speechsdk.AudioConfig(filename="temp.wav")
-
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
-
     done = False
-
     def stop_cb(evt):
         """callback that stops continuous recognition upon receiving an event `evt`"""
         print('CLOSING on {}'.format(evt))
