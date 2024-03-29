@@ -1,13 +1,12 @@
 from flask import Flask, render_template, url_for, jsonify, request
-
 import towav
-
 import azure.cognitiveservices.speech as speechsdk
-import time
-import credentials
-
+import speech2text
+import data_process as dp
+import feature_extract as fe
+import model as model
+import send_notifications as send
 app = Flask(__name__)
-#app.config['JSON_AS_ASCII'] = False
 
 @app.route('/')
 def index():
@@ -30,42 +29,25 @@ def convert_to_text_once():
 
 @app.route('/convert_continuous')
 def convert_to_text_continuous():
-    #process audio
-    towav.process_audio()
-    
-    """performs continuous speech recognition with input from an audio file"""
-    speech_key, service_region = "328d4b7e54bb445bbff9218e43468a73", "eastus"
-    speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
-    audio_config = speechsdk.AudioConfig(filename="temp.wav")
-    speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
-    done = False
-    def stop_cb(evt):
-        """callback that stops continuous recognition upon receiving an event `evt`"""
-        print('CLOSING on {}'.format(evt))
-        speech_recognizer.stop_continuous_recognition()
-        nonlocal done
-        done = True
-
-    all_results = []
-    def handle_final_result(evt):
-        all_results.append(evt.result.text)
-
-    speech_recognizer.recognized.connect(handle_final_result)
-    # Connect callbacks to the events fired by the speech recognizer
-    speech_recognizer.recognizing.connect(lambda evt: print('RECOGNIZING: {}'.format(evt)))
-    speech_recognizer.recognized.connect(lambda evt: print('RECOGNIZED: {}'.format(evt)))
-    speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
-    speech_recognizer.session_stopped.connect(lambda evt: print('SESSION STOPPED {}'.format(evt)))
-    speech_recognizer.canceled.connect(lambda evt: print('CANCELED {}'.format(evt)))
-    # stop continuous recognition on either session stopped or canceled events
-    speech_recognizer.session_stopped.connect(stop_cb)
-    speech_recognizer.canceled.connect(stop_cb)
-
-    # Start continuous speech recognition
-    speech_recognizer.start_continuous_recognition()
-    while not done:
-        time.sleep(.5)
-
-
-    #print("Printing all results:")
-    return ' '.join([str(result) for result in all_results])
+    web_url = "https://discord.com/api/webhooks/1222689655980294185/LU1I3hZfF5f0SB29D-FUoi8Ny1eMtubwzK0fmr5Z5wWUmDRa-xJdIWIrYzFHDYxW--4a"
+    message = "Observed speech repetition indicative of potential dementia."
+    try:
+        # Process audio and get transcription
+        transcription = speech2text.speech2text()
+        
+        # Process the string and extract features (Modify this part based on actual usage)
+        features = dp.process_string(transcription)
+        tag_info = fe.get_tag_info(features)
+        
+        # Train the model or make predictions based on the features
+        prediction = model.train(tag_info)[0]
+        
+        # If prediction indicates an alert, send a Discord notification
+        if prediction == 1:
+            send.send_discord_notification(web_url, message)
+            return jsonify({"result": transcription, "alert": message}), 200
+        else:
+            # If prediction is not 1, return a JSON response indicating no alert was triggered
+            return jsonify({"result": transcription, "alert": "No alert triggered"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

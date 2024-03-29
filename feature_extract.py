@@ -169,9 +169,14 @@ def get_tag_info(input):
             if freq_token_root[j] == 1:
                 occur_once = occur_once + 1
         v1 = occur_once
-        R = 100 * math.log(numtokens / (1 - (v1/v)))
-        feature_set[features['R']] = R
-                
+        # R = 100 * math.log(numtokens / (1 - (v1/v)))
+
+        if v == v1 or v == 0:
+    # Handle the case where v is equal to v1 or v is zero, which would result in a zero denominator
+            R = 0  # You can choose to assign a default value or handle this case as appropriate
+        else:
+            R = 100 * math.log(numtokens / (1 - (v1/v)))
+        feature_set[features['R']] = R           
         # ------- Automated readability index ------- 
         num_char = len([c for c in input_text if c.isdigit() or c.isalpha()])
         num_words = len([word for word in input_text.split(' ') if not word=='' and not word=='.'])

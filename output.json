@@ -1,0 +1,157 @@
+{
+    "jobName": "transcribe",
+    "accountId": "bunnies",
+    "results": {
+        "transcripts": [
+            {
+                "transcript": "Daisy. It's me, Benjamin. Benjamin. Oh my God. Of course it's you. Benjamin."
+            }
+        ],
+        "items": [
+            {
+                "start_time": "0.920",
+                "end_time": "1.480",
+                "alternatives": [
+                    {
+                        "confidence": 0.29651532,
+                        "content": "daisy"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "5.150",
+                "end_time": "5.390",
+                "alternatives": [
+                    {
+                        "confidence": 0.68302447,
+                        "content": "it's"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "5.390",
+                "end_time": "5.990",
+                "alternatives": [
+                    {
+                        "confidence": 0.60964435,
+                        "content": "me"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "6.710",
+                "end_time": "7.230",
+                "alternatives": [
+                    {
+                        "confidence": 0.9841576,
+                        "content": "benjamin"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "8.110",
+                "end_time": "8.830",
+                "alternatives": [
+                    {
+                        "confidence": 0.28297877,
+                        "content": "benjamin"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "12.520",
+                "end_time": "12.600",
+                "alternatives": [
+                    {
+                        "confidence": 0.8139296,
+                        "content": "oh"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "12.600",
+                "end_time": "12.880",
+                "alternatives": [
+                    {
+                        "confidence": 0.94216555,
+                        "content": "my"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "13.480",
+                "end_time": "14.200",
+                "alternatives": [
+                    {
+                        "confidence": 0.9918628,
+                        "content": "god"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "15.750",
+                "end_time": "15.990",
+                "alternatives": [
+                    {
+                        "confidence": 0.81061184,
+                        "content": "of"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "16.150",
+                "end_time": "16.710",
+                "alternatives": [
+                    {
+                        "confidence": 0.91044915,
+                        "content": "course"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "16.750",
+                "end_time": "16.950",
+                "alternatives": [
+                    {
+                        "confidence": 0.5521269,
+                        "content": "it's"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "17.030",
+                "end_time": "17.350",
+                "alternatives": [
+                    {
+                        "confidence": 0.735145,
+                        "content": "you"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "19.040",
+                "end_time": "19.360",
+                "alternatives": [
+                    {
+                        "confidence": 0.7110552,
+                        "content": "benjamin"
+                    }
+                ],
+                "type": "pronunciation"
+            }
+        ]
+    },
+    "status": "COMPLETED"
+}

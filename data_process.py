@@ -30,7 +30,7 @@ def process_string(content):
         if data[i]['type'] == "pronunciation":
             start.append(float(data[i]['start_time']))
             end.append(float(data[i]['end_time']))
-            if float(data[i]['alternatives'][0]['confidence']) < .50:
+            if float(data[i]['alternatives'][0]['confidence']) < .3:
                 count_unintelligible += 1
         i += 1
     i = 1
@@ -41,6 +41,7 @@ def process_string(content):
             count_repetitions += 1
         i += 1
     x = [string, count_pause, count_unintelligible, count_trailing, count_repetitions]
+    print(x)
     return x
 
 

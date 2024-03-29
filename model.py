@@ -75,6 +75,6 @@ def train(feature_set):
     prediction = lda.predict(inar)
     return prediction   # a percentage from 0 to 100 
 
-a = dp.process_string('testfile.json')
-b = fe.get_tag_info(a)
-print(train(b))
+# a = dp.process_string('testfile.json')
+# b = fe.get_tag_info(a)
+# print(train(b))
